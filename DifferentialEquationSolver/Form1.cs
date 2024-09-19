@@ -32,8 +32,6 @@ namespace DifferentialEquationSolver
         int stepPointForTimer;
 
         ChartArea c;
-        //Series series;
-        //Series seriesForTimer;
 
         Random r = new Random(1);
 
@@ -73,22 +71,7 @@ namespace DifferentialEquationSolver
                 yNoise[i] = new double[numberPoints];
             }
         }
-        private double ConvertToDoubleFromNumeric(NumericUpDown num, double defaultValue)
-        {
-            double ret;
-
-            try
-            {
-                ret = Convert.ToDouble(num.Value);
-            }
-            catch
-            {
-                ret = defaultValue;
-            }
-
-            return ret;
-        }
-
+        
         public void InitPlot(int[] xRange, int[] yRange)
         {
             chart1.Series.Clear();
@@ -134,7 +117,6 @@ namespace DifferentialEquationSolver
 
         void SolveEquations()
         {
-
             if(rbEuler.Checked)
             {
                 SolveEquationEuler();
@@ -150,9 +132,7 @@ namespace DifferentialEquationSolver
             else
             {
                 return;
-            }
-            
-            
+            }            
         }
 
         void SolveEquationEuler()
@@ -169,9 +149,7 @@ namespace DifferentialEquationSolver
         {
             
         }
-
-        private delegate double FuncDelegate(double dx, double dy, double x, double y, Vector4d bias );
-
+                
         double fdX(double dx_, double dy_, double x_, double y_, Vector4d bias)
         {
             double ret = 0;
@@ -256,13 +234,12 @@ namespace DifferentialEquationSolver
         }
         private void btnTrajectory_Click(object sender, EventArgs e)
         {
-                                   
+            // animation for trajectory
         }
 
-        int numPointFotTimer = 0;
         private void timer1_Tick(object sender, EventArgs e)
         {
-            
+            // timer for animation
         }
 
         private void btnRandom_Click(object sender, EventArgs e)
@@ -292,44 +269,26 @@ namespace DifferentialEquationSolver
 
         private void btnMeanX_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < numberPoints; i++)
-            {
-                double sum = 0;
-                for (int j = 0; j < xNoise.Length; j++)
-                {
-                    sum += xNoise[j][i];
-                }
-
-                xMean[i] = sum / xNoise.Length;
-            }
+            // calculate xMean[]
 
             Plot(t, xMean, markerSizeForPlot, Color.Black, standartPlotType);
         }
 
         private void btnMeanY_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < numberPoints; i++)
-            {
-                double sum = 0;
-                for (int j = 0; j < yNoise.Length; j++)
-                {
-                    sum += yNoise[j][i];
-                }
-
-                yMean[i] = sum / yNoise.Length;
-            }
+            // calculate xMean[]
 
             Plot(t, yMean, markerSizeForPlot, Color.Black, standartPlotType);
         }
 
         private void btnConfIntX_Click(object sender, EventArgs e)
         {
-            
+            // calculate confident interval for x
         }
 
         private void btnConfIntY_Click(object sender, EventArgs e)
         {
-            
+            // calculate confident interval for y
         }
 
         private void btnClearPlot_Click(object sender, EventArgs e)
